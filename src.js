@@ -45,23 +45,23 @@
   // [3, 4, 3, 3, 1]
   // ];
 
-  function createGameBoard(width, height){
+var gameBoard = function createGameBoard(width, height){
       var result = [];
       for (var i = 0 ; i < width; i++) {
           result[i] = [];
-          for (var j = 0; j < height; j++) {
+          for (var j = 0; j   < height; j++) {
               result[i][j] = Math.floor(Math.random() * 5);
           }
       }
       return result;
-  }
+  };
 
-var gameBoard = createGameBoard(5, 5);
+var gameBoard;
 
 function checkGameBoard(theBoard) {
-  for (var r = 0; r < gameBoard.length; r++) {
+  for (var r = gameBoard.length; r > 0; r--) {
     var row = gameBoard[r];
-    for (var c = 0; c < row.length; c++) {
+    for (var c = row.length; c > 0; c--) {
       var column = row[c];
       if (column === 1) {
         console.log("This is a grass tile" + "[" + row + "," + column + "]");
