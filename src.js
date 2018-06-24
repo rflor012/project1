@@ -1,49 +1,3 @@
-// window.onload = function() {
-// var canvas=document.getElementById("game-board");
-// var ctx= canvas.getContext("2d");
-// };
-
-// function tile(){
-//   this.draw = function(){
-//     for(var r= 0; r < testMap.length; r++){
-//       var row = testMap[r];
-//       for (var c=0; c< row.length; c++){
-//         var column = row[c];
-//
-//         if (column == "4"){
-//           ctx.beginPath();
-//           ctx.rect(r, c, 32, 32);
-//           ctx.stroke();
-//         } else if (column == "3") {
-//           ctx.beginPath();
-//           ctx.rect(r, c, 32, 32);
-//           ctx.stroke();
-//         } else if (column == "2"){
-//           ctx.beginPath();
-//           ctx.rect(r, c, 32, 32);
-//           ctx.stroke();
-//         } else if (column == "1"){
-//           ctx.beginPath();
-//           ctx.rect(r,c, 32, 32);
-//           ctx.stroke();
-//         } else{
-//
-//         }
-//       }
-//     }
-//
-//
-//   };
-// }
-
-
-// var gameBoard = [];
-  // [3, 3, 3, 3, 3],
-  // [3, 4, 4, 3, 3],
-  // [3, 4, 4, 3, 1],
-  // [3, 4, 2, 3, 3],
-  // [3, 4, 3, 3, 1]
-  // ];
 
 var gameBoard = function createGameBoard(width, height){
       var result = [];
@@ -61,19 +15,19 @@ var gameBoard;
 
 function checkGameBoard(theBoard) {
   for (var r = gameBoard.length; r > 0; r--) {
-    var row = gameBoard[r];
+    var row = gameBoard[r-1];
     for (var c = row.length; c > 0; c--) {
-      var column = row[c];
+      var column = row[c-1 + 0];
       if (column === 1) {
-        console.log("This is a grass tile" + "[" + row + "," + column + "]");
+        console.log("This is a grass tile " + "[Row " + row + " , Column " + column + " ]");
       } else if (column === 2) {
-        console.log("This is a dirt tile" + "[" + row + "," + column + "]");
+        console.log("This is a dirt tile " + "[Row " + row + " ,Column " + column + " ]");
       } else if (column === 3) {
-        console.log("This is a stone tile" + "[" + row + "," + column + "]");
+        console.log("This is a stone tile " + "[Row " + row + " ,Column " + column + " ]");
       } else if (column === 4) {
-        console.log("This is a geyser tile" + "[" + row + "," + column + "]");
-      } else {
-        console.log("This tile has a 0");
+        console.log("This is a geyser tile" + "[Row " + row + " ,Column " + column + " ]");
+      } else if(column === 0){
+        console.log("This tile has a 0 " + "[Row " + row + " ,Column " + column + " ]");
       }
     }
   }
