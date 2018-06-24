@@ -49,11 +49,12 @@ var gameBoard = function createGameBoard(width, height){
       var result = [];
       for (var i = 0 ; i < width; i++) {
           result[i] = [];
-          for (var j = 0; j   < height; j++) {
+          for (var j = 0; j < height; j++) {
               result[i][j] = Math.floor(Math.random() * 5);
           }
       }
-      return result;
+      this.gameBoard = result;
+      return this.gameBoard;
   };
 
 var gameBoard;
