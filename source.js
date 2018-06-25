@@ -1,10 +1,12 @@
   var lastClicked;
+  var idTile;
 
-  var grid = clickableGrid(6, 12, function(el, row, col, i) {
+  var grid = clickableGrid(7, 13, function(el, row, col, i) {
     console.log("You clicked on element:", el);
     console.log("You clicked on row:", row);
     console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
+    console.log("You clicked on item #:", idTile= [row, col]);
+
 
     el.className = 'clicked';
     if (lastClicked)
@@ -21,10 +23,10 @@
       for (var c = 0; c < cols; ++c) {
         var cell = tr.appendChild(document.createElement('td'));
 
-        //insert any element/item
 
-        cell.classList.add("tiles");
-        cell.appendChild(tileMaker());
+        //insert any element/items
+        // cell.classList.add("tiles");
+        // cell.appendChild(tileMaker());
         // cell.appendChild(tileMaker());
 
         var addTile = (cell.createElement = tileMaker());
@@ -49,7 +51,7 @@ function displayResult() {
   x.innerHTML = "New cell";
 
   var img = document.createElement('img');
-  img.src = "dirt.gif";
+  img.src = "tree.gif";
   x.appendChild(img);
 
   var img2 = document.createElement('img');
@@ -69,12 +71,30 @@ function displayResult() {
 
 function tileMaker() {
   var x = document.createElement("IMG");
-  x.setAttribute("src", "dirt.gif");
+  x.setAttribute("src", "tree.gif");
   x.setAttribute("width", "75px");
   x.setAttribute("height", "75px");
   x.setAttribute("alt", "dirt tile");
   var tiles = document.getElementsByClassName('tiles');
-
   return (x);
+}
 
+function checkGameBoard(grid) {
+  for (var r = grid.length; r > 0; r--) {
+    var row = grid[r-1];
+    for (var c = row.length; c > 0; c--) {
+      var column = row[c-1 + 0];
+      if (column === 1) {
+        console.log("This is a grass tile " + "[Row " + row + " , Column " + column + " ]");
+      } else if (column === 2) {
+        console.log("This is a dirt tile " + "[Row " + row + " ,Column " + column + " ]");
+      } else if (column === 3) {
+        console.log("This is a stone tile " + "[Row " + row + " ,Column " + column + " ]");
+      } else if (column === 4) {
+        console.log("This is a geyser tile" + "[Row " + row + " ,Column " + column + " ]");
+      } else if(column === 0){
+        console.log("This tile has a 0 " + "[Row " + row + " ,Column " + column + " ]");
+      }
+    }
+  }
 }
