@@ -1,3 +1,25 @@
+/*
+<ul id="fruits"></ul>
+And the JavaScript:
+
+var fruitsList = document.getElementById('fruits'),
+    li = document.createElement('li'),
+    clone;
+['apples','bananas','cranberries'].forEach(function (fruit, index) {
+    clone = li.cloneNode();
+    clone.textContent = index + ': ' + fruit;
+    fruitsList.appendChild(clone);
+});
+Resulting in the output:
+
+<ul id="fruits">
+    <li>0: apples</li>
+    <li>1: bananas</li>
+    <li>2: cranberries</li>
+</ul>
+*/
+
+
 
 var gameBoard = function createGameBoard(width, height){
       var result = [];
@@ -12,6 +34,17 @@ var gameBoard = function createGameBoard(width, height){
   };
 
 var gameBoard;
+
+var tileBoard = function createTileBoard(resultsArray){
+    theArray = document.getElementById('game-board');
+    tileItem = document.createElement("li");
+    gameBoard.forEach(function(tile, index){
+    clone = tileItem.cloneNode();
+    clone.textContent = index + ":" + tile;
+    theArray.appendChild(clone);
+    });
+
+};
 
 function checkGameBoard(theBoard) {
   for (var r = gameBoard.length; r > 0; r--) {
@@ -32,6 +65,7 @@ function checkGameBoard(theBoard) {
     }
   }
 }
+
 
 
 function randomTileSet() {
