@@ -14,7 +14,7 @@ var grid = clickableGrid(7, 13, function(el, row, col, i) {
   lastClicked = el;
 });
 
-function clickableGrid(rows, cols, callback) {
+function clickableGrid(rows, cols, idTile) {
   var i = 0;
   var grid = document.createElement('table');
   var gridBoard = document.getElementsByClassName('tile');
@@ -42,7 +42,7 @@ function clickableGrid(rows, cols, callback) {
       //   var addStoneTile = (cell.createElement = stoneTileMaker());
       //   cell.appendChild(stoneTileMaker());
       }
-      cell.addEventListener('click', (function(el, r, c, i) {
+      cell.addEventListener('click', (function(el, r, c, idTile) {
         return function() {
           callback(el, r, c, i);
         };

@@ -1,13 +1,13 @@
 var lastClicked;
- var idTile;
- var map =[
-   [0,3,1,4,1,0,0], // 0 is a movaable tile
-   [0,0,0,0,3,0,0],// 1 is a friendly unit
-   [0,3,0,0,0,3,3],// 2 is an enemy
-   [3,0,0,3,0,0,0],// 3 is an obstacle
-   [0,0,0,0,0,0,0],// 4 hero.gif
-   [3,0,3,0,0,3,3],// 5 orc.gif
-   [0,0,2,5,2,0,0]
+var idTile;
+var map =[
+   [3,0,1,4,1,0,0,1,2,0,0,4,1], //s 0 is a movaable tile
+   [0,0,0,0,0,0,0,1,0,1,0,0,2],// 1 is a friendly unit
+   [0,0,1,0,0,0,0,0,0,1,2,0,1],// 2 is an enemy
+   [0,0,0,0,0,0,0,1,2,2,0,1,2],// 3 is an obstacle
+   [0,0,0,2,0,0,0,1,0,2,2,1,1],// 4 hero.gif
+   [0,0,0,0,0,0,0,4,2,2,0,0,0],// s5 orc.gif
+   [0,0,2,5,2,0,0,0,2,0,1,2,0]
  ];
 
 var grid = clickableGrid(7, 13, function(el, row, col, i) {
@@ -31,6 +31,17 @@ function clickableGrid(rows, cols, callback) {
    for (var c = 0; c < cols; ++c) {
      var cell = tr.appendChild(document.createElement('td'));
      cell.classList.add("tiles");
+
+
+
+     if(map[r][c] === 1){
+       cell.appendChild(stoneTileMaker());
+     } else if(map[r][c] === 2){
+       cell.appendChild(geyserTileMaker());     }
+       else if(map[r][c] === 3){
+         cell.appendChild(dirtTileMaker());
+         //currently generating a hero
+       }
 
      cell.addEventListener('click', (function(el, r, c, i) {
        return function() {
@@ -70,9 +81,9 @@ return (x);
 
 function dirtTileMaker() {
 var x = document.createElement("IMG");
-x.setAttribute("src", "dirt.gif");
-x.setAttribute("width", "75px");
-x.setAttribute("height", "75px");
+x.setAttribute("src", "Hero.gif");
+x.setAttribute("width", "45px");
+x.setAttribute("height", "45px");
 x.setAttribute("alt", "dirt tile");
 var dirtTiles = document.getElementsByClassName('dirt');
 return (x);
