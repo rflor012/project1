@@ -1,13 +1,13 @@
 var lastClicked;
  var idTile;
  var map =[
-   [0,0,0,0,0,0,0], // 0 is a border
-   [0,2,2,2,2,2,0],// 1 is a friendly unit
-   [0,2,2,2,2,2,0],// 2 is an enemy
-   [0,2,2,2,2,2,0],// 3 is an obstacle
-   [0,2,2,2,2,2,0],// 4
-   [0,2,2,2,2,2,0],// 5
-   [0,0,0,0,0,0,0]
+   [0,3,1,4,1,0,0], // 0 is a movaable tile
+   [0,0,0,0,3,0,0],// 1 is a friendly unit
+   [0,3,0,0,0,3,3],// 2 is an enemy
+   [3,0,0,3,0,0,0],// 3 is an obstacle
+   [0,0,0,0,0,0,0],// 4 hero.gif
+   [3,0,3,0,0,3,3],// 5 orc.gif
+   [0,0,2,5,2,0,0]
  ];
 
 var grid = clickableGrid(7, 13, function(el, row, col, i) {

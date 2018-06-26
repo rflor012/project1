@@ -16,13 +16,12 @@ function Player(healthArg, strengthArg, moving){
   this.receiveDamage = function(theDamage){
     this.health -= theDamage;
   };
-
 }
 
 Object.create(Player.prototype);
 
 
-
+/// down is viking old code
 // Viking
 function Viking(name, health, strength){
   Soldier.call(this, health, strength);
