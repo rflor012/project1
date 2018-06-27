@@ -163,3 +163,16 @@ return (x);
 //   }
 // }
 // }
+
+
+//PROTO TYPE STUFF FROM HERE down
+// /*jshint esversion: 6 */
+// function Adam(name, healthPoints,
+//   damagePoints, manaPoints, direction, position){
+//
+//   this.name  = name;
+//   this.health = healthPoints;
+//   this.damage = damagePoints;
+//   this.mana = manaPoints;
+//   this.currentPosition = position;
+  // this.coordinates = document.getElementsByClassName('hero')
