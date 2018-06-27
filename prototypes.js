@@ -11,23 +11,33 @@ var map =[
 [0,0,0,0,0,0,0,0,2,2],
 [0,0,0,0,0,0,0,2,2,2],
 ];
-var obstacles = [];
+var canMove;
+var map2 = map;
 
 Array.prototype.generateMap = function(){
   for (var r = 0; r < map.length; ++r) {
         for (var c = 0; c < map[r].length; ++c) {
           switch(map[r][c]) {
             case 0:
-            {console.log("This is tile is open for movement[" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            {console.log("This tile is open for movement [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            if(map[r][c] === 0){
+              map2[r][c] = 0;
+              map2[r][c + 1] = 1;
+              console.log("new Position on Map: [" + map2.indexOf(map2[r]) + ", " + map2.indexOf(map2[c + 1]) + "]");
+            }
+
             break;}
             case 1:
             {console.log("The generateMap function found a friendly unit at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+
             break;}
             case 2:
             {console.log("The generateMap function found an enemy at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+
             break;}
             case 3:
             console.log("the generateMap function found an obstacle at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+
             break;}
           }
         }
