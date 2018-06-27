@@ -1,16 +1,19 @@
 var lastClicked;
 var idTile;
 var map =[
-   [0,0,0,0,0,0,0,0,0,0,0,0,0], //s 0 is a movaable tile
-   [0,1,0,0,0,0,0,0,0,0,0,1,0],// 1 is a friendly unit
-   [0,0,0,4,0,3,3,3,0,4,0,0,0],// 2 is an enemy
-   [0,0,0,4,0,3,2,3,0,4,0,0,0],// 3 is an obstacle
-   [0,0,0,4,0,3,3,3,0,4,0,0,0],// 4 hero.gif
-   [0,1,0,0,0,0,0,0,0,0,0,1,0],// s5 orc.gif
-   [0,0,0,0,0,0,0,0,0,0,0,0,0]
- ];
+[0,1,1,0,0,0,0,0,0,0],  // 0 is a movaable tile
+[1,1,1,0,0,0,0,0,0,0],  // 1 is a friendly unit
+[0,0,3,0,0,0,3,0,0,0],  // 2 is an enemy
+[0,0,0,3,0,0,0,0,3,0],  // 3 is an obstacle
+[3,0,0,0,0,0,3,0,3,3],
+[0,3,0,0,0,0,0,0,3,3],
+[0,0,0,0,3,0,0,0,0,0],
+[0,0,0,0,3,0,0,3,0,0],
+[0,0,0,0,0,0,0,0,2,2],
+[0,0,0,0,0,0,0,2,2,2],
+];
 
-var grid = clickableGrid(7, 13, function(el, row, col, i) {
+var grid = clickableGrid(10, 10, function(el, row, col, i) {
  console.log("You clicked on element:", el);
  console.log("You clicked on row:", row);
  console.log("You clicked on col:", col);
@@ -32,16 +35,17 @@ function clickableGrid(rows, cols, callback) {
       var cell = tr.appendChild(document.createElement('td'));
       cell.classList.add("tiles");
 
-      if (map[r][c] === 1) {
-        cell.appendChild(stoneTileMaker());
-      } else if (map[r][c] === 2) {
-        cell.appendChild(geyserTileMaker());
-      } else if (map[r][c] === 3) {
-        cell.appendChild(dirtTileMaker());
-      } else if (map[r][c] === 4) {
-        cell.appendChild(treeTileMaker());
-      }
-
+      switch(map[r][c]) {
+        case 1:
+        {cell.appendChild(stoneTileMaker());}
+        break;
+        case 2:
+        {cell.appendChild(geyserTileMaker());}
+        break;
+        case 3:
+        {cell.appendChild(treeTileMaker());}
+        break;
+        }
       cell.addEventListener('click', (function(el, r, c, i) {
         return function() {
           callback(el, r, c, i);

@@ -1,101 +1,126 @@
-function Adam(name, healthPoints,
-  damagePoints, manaPoints, magicDamagePoints,
-  idTile, direction){
+//the Map Generator Constructor function
+var map =[
+[0,1,1,0,0,0,0,0,0,0],  // 0 is a movaable tile
+[1,1,1,0,0,0,0,0,0,0],  // 1 is a friendly unit
+[0,0,3,0,0,0,3,0,0,0],  // 2 is an enemy
+[0,0,0,3,0,0,0,0,3,0],  // 3 is an obstacle
+[3,0,0,0,0,0,3,0,3,3],
+[0,3,0,0,0,0,0,0,3,3],
+[0,0,0,0,3,0,0,0,0,0],
+[0,0,0,0,3,0,0,3,0,0],
+[0,0,0,0,0,0,0,0,2,2],
+[0,0,0,0,0,0,0,2,2,2],
+];
+var obstacles = [];
 
-  this.name  = name;
+Array.prototype.generateMap = function(){
+  for (var r = 0; r < map.length; ++r) {
+        for (var c = 0; c < map[r].length; ++c) {
+          switch(map[r][c]) {
+            case 0:
+            {console.log("This is tile is open for movement[" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            break;}
+            case 1:
+            {console.log("The generateMap function found a friendly unit at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            break;}
+            case 2:
+            {console.log("The generateMap function found an enemy at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            break;}
+            case 3:
+            console.log("the generateMap function found an obstacle at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            break;}
+          }
+        }
+      };
+
+Map.prototype = Object.create(Array.prototype);
+Map.prototype.constructor = Map;
+
+
+function Adam(name, healthPoints, damagePoints, idTile, direction) {
+  this.name = name;
   this.health = healthPoints;
   this.damage = damagePoints;
-  this.mana = manaPoints;
-  this.mdamage = magicDamagePoints;
   this.currentPosition = idTile;
-	this.direction = direction;
+  this.direction = direction;
 
   // Adam.prototype.insertNameOfFunction = function(){
   //   return this.damage;
   // };
   //var Adam1 = new Adam("Being", 100, 20, 100, 15, [x, y], d);
 
-  Adam.prototype.attack = function(){
+  Adam.prototype.attack = function() {
     return this.damage;
   };
 
-  Adam.prototype.castSpell = function(){
-    console.log(this.name + " cast SpellName");
-    return this.mdamage;
-  };
-
-  Adam.prototype.walkNorth = function(){
+  Adam.prototype.walkNorth = function() {
     this.currentPosition();
     console.log("You are now at position" + idTile);
   };
 
-  Adam.prototype.walkEast = function(){
+  Adam.prototype.walkEast = function() {
 
     console.log("You are now at position" + idTile);
 
   };
 
-  Adam.prototype.walkSouth = function(){
+  Adam.prototype.walkSouth = function() {
 
     console.log("You are now at position" + idTile);
 
   };
 
-  Adam.prototype.walkWest = function(){
+  Adam.prototype.walkWest = function() {
 
     console.log("You are now at position" + idTile);
 
   };
 
-  this.receiveDamage = function(theDamage){
+  this.receiveDamage = function(theDamage) {
     this.health -= theDamage;
   };
 }
 
-
 Adam.prototype = Object.create(Adam.prototype);
 Adam.prototype.constructor = Adam;
+var Adam1 = new Adam("Adam", 100, 20, [x, y], d);
 
-var Adam1 = new Adam("Being", 100, 20, 100, 15, [x, y], d);
+//mage spell user
+function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
+  Adam.call(this, health, damage, idTile, direction);
+  this.name = name;
+  this.mana = mana;
+  this.mdamage = magicDamage;
 
-//Ranged Attack Character
-function Eve(name, healthPoints,
-  damagePoints, rangedAttackDamage,
-  idTile, direction){
-    Adam.call(this, health, damage, idTile, direction);
-
-    this.name = name;
-    this.ranged = rangedAttackDamage;
-
-    Eve.prototype.rangedAttack = function(){
-      console.log (this.name + " fired an arrow!");
-      return this.rangedAttackDamage;
-    };
-  }
-
-Eve.prototype = Object.create(Adam.prototype);
-Eve.prototype.constructor = Eve;
-
-  function Mage(name, healthPoints,
-    damagePoints, magicDamagePoints,
-    manaPoints, idTile, direction){
-    Adam.call(this, health, damage, idTile, direction);
-
-    this.name = name;
-    this.magicDamagePoints = mDamage;
-    this.manaPoints = mana;
-
-    Mage.prototype.castSpell = function(){
-      console.log (this.name + "cast a magic spell!");
-      return this.magicDamagePoints;
-    };
+  Mage.prototype.castSpell = function() {
+    console.log(this.name + " cast SpellName");
+    return this.magicdamage;
+  };
 }
 
 Mage.prototype = Object.create(Adam.prototype);
 Mage.prototype.constructor = Mage;
+var Sorc = new Mage("Mage", 100, 10, 100, 40, [x,y], d);
+
+//Ranged Attack Character
+function Eve(name, health, damage, rangedAttackDamage, idTile, direction) {
+  Adam.call(this, health, damage, idTile, direction);
+  this.name = name;
+  this.ranged = rangedAttackDamage;
+
+  Eve.prototype.rangedAttack = function() {
+    console.log(this.name + " fired an arrow!");
+    return this.rangedAttackDamage;
+  };
+}
+
+Eve.prototype = Object.create(Adam.prototype);
+Eve.prototype.constructor = Eve;
+var Archer = new Eve("Archer",100,20,45,[x, y], d);
+
+
 //Gad help me
 //integrating mars rover module
-
 alert("COMMAND LIST: (case sensitive)\n l:left \n r:right \n f:forward \n b:back");
   var d =["n"];                       //direction
   var x = 0;  //Math.random                        //X axis (West-East)
