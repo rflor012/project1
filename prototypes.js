@@ -65,13 +65,16 @@ function Eve(name, healthPoints,
     Adam.call(this, health, damage, idTile, direction);
 
     this.name = name;
-    this.rangedAttackDamage = ranged;
+    this.ranged = rangedAttackDamage;
 
     Eve.prototype.rangedAttack = function(){
       console.log (this.name + " fired an arrow!");
       return this.rangedAttackDamage;
     };
   }
+
+Eve.prototype = Object.create(Adam.prototype);
+Eve.prototype.constructor = Eve;
 
   function Mage(name, healthPoints,
     damagePoints, magicDamagePoints,
@@ -87,6 +90,9 @@ function Eve(name, healthPoints,
       return this.magicDamagePoints;
     };
 }
+
+Mage.prototype = Object.create(Adam.prototype);
+Mage.prototype.constructor = Mage;
 //Gad help me
 //integrating mars rover module
 
