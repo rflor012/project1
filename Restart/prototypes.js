@@ -1,3 +1,4 @@
+window.onload = function() {
 //the Map Generator Constructor function
 var map = [
   [3,3,0,0,1],
@@ -11,30 +12,30 @@ var r = 0;
 var c = 0;
 
 
-Array.prototype.generateMap = function() {
-  for (var r = 0; r < map.length; r++) {
-    for (var c = 0; c < map[r].length; c++) {
-      switch (map[r][c]) {
-        case 0 || 3:
-          {
-            console.log("the generateMap function found an obstacle at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
-            break;
-          }
-        case 1:
-          {
-            console.log("The generateMap function found a friendly unit at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
-            theHeros = document.getElementsByClassName('hero');
-            break;
-          }
-        case 2:
-          {
-            console.log("The generateMap function found an enemy at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
-            break;
-          }
-      }
-    }
-  }
-};
+// Array.prototype.generateMap = function() {
+//   for (var r = 0; r < map.length; r++) {
+//     for (var c = 0; c < map[r].length; c++) {
+//       switch (map[r][c]) {
+//         case 0 || 3:
+//           {
+//             console.log("the generateMap function found an obstacle at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+//             break;
+//           }
+//         case 1:
+//           {
+//             console.log("The generateMap function found a friendly unit at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+//             theHeros = document.getElementsByClassName('hero');
+//             break;
+//           }
+//         case 2:
+//           {
+//             console.log("The generateMap function found an enemy at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+//             break;
+//           }
+//       }
+//     }
+//   }
+// };
 
 Map.prototype = Object.create(Array.prototype);
 Map.prototype.constructor = Map;
@@ -55,10 +56,9 @@ function Adam(name, healthPoints, damagePoints, idTile, direction) {
 
   Adam.prototype.receiveDamage = function(theDamage) {
     this.health -= theDamage;
-    console.log(this.name + " was attacked!");
     if (this.health > 0){
-      return this.name + " has received " + theDamage + " points of damage.";
-    } else{
+      return this.name + " was attacked and has received " + theDamage + " points of damage.";
+    } else if (this.health < 0){
       return this.name + " has succumbed to his wounds";
     }
   };
@@ -95,7 +95,6 @@ function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
 
   Mage.prototype.receiveDamage = function(damage){
     this.health -= Number(damage);
-    console.log(this.name + "was attacked!");
     if (this.health > 0){
       return this.name + " has received " + damage + " points of damage.";
     } else {
@@ -105,7 +104,6 @@ function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
 
 Mage.prototype.receiveSavageBite = function(savageBiteDamage){
   this.health -= savageBiteDamage;
-  console.log(this.name + " was attacked!");
   if (this.health > 0){
     return this.name + " was bitten by a savage Orc. " + this.name + " takes " + savageBiteDamage + " points of damage!";
   } else {
@@ -135,7 +133,7 @@ function Eve(name, health, damage, rangedAttackDamage, idTile, direction) {
 
     if (this.health > 0){
       return this.name + " has received " + damage + " points of damage.";
-    }else {
+    }else if(this.health < 0) {
         return this.name + "has succumbed to her wounds.";
     }
   };
@@ -178,7 +176,7 @@ function Orc(name, health, damage, savageBiteDamage, idTile, direction) {
     this.health -= damage;
     if (this.health > 0){
       return this.name + " has received " + damage + " points of damage.";
-    }else {
+    }else if (this.health <0) {
       return this.name + "has succumbed to its wounds.";
     }
   };
@@ -223,12 +221,17 @@ FieldOfBattle.prototype.friendlyAttack = function () {
   var orcIndex = Math.floor(Math.random() * this.orcArmy.length);
 
   var friendlyUnit = this.friendlyArmy[friendlyIndex];
-  var orcUnit = this.orcArmy[orcIndex];
+  var orcUnit = this.orcArmy[orcIndex]; //this.orcArmy[orcIndex].idTile === [2,1] id
   var that = this;
   var combatResult = orcUnit.receiveDamage(friendlyUnit.attack());
+  for (var r = 0; r < map.length; r++) {
+    for (var c = 0; c < map[r].length; c++) {
+
+    }
+  }
   if(orcUnit.health <= 0){
     //animation code will go here
-    $('td > IMG').eq(orcIndex).addClass('dead').removeClass('orc');
+    $('td > IMG').eq(map[Orc.idTile]).addClass('dead').removeClass('orc');
     $('td > IMG').eq(orcIndex).prop('src', "dead.png");
     $('td > IMG').eq(orcIndex).prop('width', '45px');
     $('td > IMG').eq(orcIndex).prop('height', '45px');
@@ -260,10 +263,12 @@ FieldOfBattle.prototype.orcAttack = function () {
   var orcUnit = this.orcArmy[orcIndex];
   var that = this;
   var combatResult = friendlyUnit.receiveDamage(orcUnit.attack());
+  var x = this.orcArmy[orcIndex].idTile[0];
+  var y = this.orcArmy[orcIndex].idTile[1];
   if(orcUnit.health <= 0){
     //animation code will go here
-    $('IMG').eq(orcIndex).addClass('dead').removeClass('orc');
-    $('IMG').eq(orcIndex).prop('src', "dead.png");
+    $('IMG').eq().addClass('dead').removeClass('orc');
+    $('IMG').eq().prop('src', "dead.png");
     that.theDead.push(friendlyUnit);
     that.friendlyArmy.splice(friendlyIndex, 1);
     //dom selector here to toggle a tombstone at place in index of orcArmy;
@@ -316,3 +321,42 @@ theFieldOfBattle.addOrc(Orc3);
 theFieldOfBattle.addOrc(Orc4);
 
 //function Orc(name, health, damage, savageBiteDamage, idTile, direction)
+
+  //function Orc(name, health, damage, savageBiteDamage, idTile, direction)
+
+  // adding DOM features
+  function updateDOM(){
+    for(var i = 0; i < theFieldOfBattle.friendlyArmy.length; i++){
+      $('.soldier-box .health').eq(i).html("<span>health:</span>"+theFieldOfBattle.friendlyArmy[i].health);
+      $('.soldier-box .strength').eq(i).html("<span>strength:</span>"+theFieldOfBattle.friendlyArmy[i].strength);
+    }
+    for(var i = 0; i < theFieldOfBattle.orcArmy.length; i++){
+      $('.orc-box .health').eq(i).html("<span>health:</span>"+theFieldOfBattle.orcArmy[i].health);
+      $('.orc-box .strength').eq(i).html("<span>strength:</span>"+theFieldOfBattle.orcArmy[i].strength);
+    }
+    for(var i = 0; i < theFieldOfBattle.theDead; i++){
+      $('.death-box .health').eq(i).html('RIP');
+      $('.death-box .strength').eq(i).html('RIP');
+    }
+
+  if(theFieldOfBattle.combatStatus()){
+      $('.info scroll-left').text($(theFieldOfBattle.combatResult()));
+  }
+  }
+  $(document).ready(function(){
+    updateDOM();
+    $('.attack').on('click', function(){ $('.info').text(theFieldOfBattle.friendlyAttack()); //theFieldOfBattle.friendlyAttack()
+    setTimeout(function(){ updateDOM();}, 2000);});
+    $('.attack').on('click', function(){ $('.info').text(theFieldOfBattle.orcAttack()); //theFieldOfBattle.friendlyAttack()
+    setTimeout(function(){ updateDOM();}, 2000);});
+    $('.cast').on('click', function(){ $('.info').text(Mage.prototype.castSpell()); //theFieldOfBattle.friendlyAttack()
+    setTimeout(function(){ updateDOM();}, 2000);});
+    $('.shoot').on('click', function(){ $('.info').text(Eve.prototype.rangedAttack()); //theFieldOfBattle.friendlyAttack()
+    setTimeout(function(){ updateDOM();}, 2000);});
+    $('.bite').on('click', function(){ $('.info').text(Orc.prototype.biteTheBadGuy()); //theFieldOfBattle.friendlyAttack()
+    setTimeout(function(){ updateDOM();}, 2000);});
+
+  });
+
+};
+  // add the on.load thing to call theFieldOfBattle

@@ -8,7 +8,6 @@
   width: 400px;
   display: block;
   background-size: cover;
-  /* background-image: url(https://media.giphy.com/media/vrIWgzi5qXiY8/giphy.gif); */
 }
 .status {
   position: relative;
@@ -73,6 +72,7 @@ ul {
 }
 
 .grid {
+  background-image: url("grass.png");
   position: relative;
   bottom: 1100px;
   border-collapse:collapse;
