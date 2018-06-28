@@ -1,12 +1,12 @@
 //the Map Generator Constructor function
-var map =[
-[2,0,0,0,0,2],  // 0 is a movaable tile
-[0,1,1,1,1,0],  // 1 is a friendly unit
-[0,3,3,3,3,0],
-[2,0,0,0,0,2]
+var map = [
+  [3,3,0,0,1],
+  [0,1,1,0,2],
+  [0,2,2,2,3],
+  [1,4,0,1,0],
+  [2,0,0,0,3],
 ];
 
-var map2 = map;
 var r = 0;
 var c = 0;
 
@@ -32,6 +32,7 @@ Array.prototype.generateMap = function() {
         case 1:
           {
             console.log("The generateMap function found a friendly unit at [" + map.indexOf(map[r]) + " , " + map.indexOf(map[c]) + "]");
+            theHeros = document.getElementsByClassName('hero');
             break;
           }
         case 2:
@@ -234,13 +235,24 @@ FieldOfBattle.prototype.friendlyAttack = function () {
   var orcUnit = this.orcArmy[orcIndex];
   var that = this;
   var combatResult = orcUnit.receiveDamage(friendlyUnit.attack());
-    if(orcUnit.health <= 0){
-      //animation code will go here
-      that.theDead +=1;
-      that.orcArmy.splice(orcIndex, 1);
-      //dom selector here to toggle a tombstone at place in index of orcArmy;
-      //we can add class tombstone and toggle it with orc css selector. will need to work on this.
-    }
+  if(orcUnit.health <= 0){
+    //animation code will go here
+    that.theDead +=1;
+    that.orcArmy.splice(orcIndex, 1);
+    //dom selector here to toggle a tombstone at place in index of orcArmy;
+    //we can add class tombstone and toggle it with orc css selector. will need to work on this.
+  }
+  var attackerUnit = $('.hero').eq(friendlyIndex);
+  attackerUnit.addClass("engager-indicator");
+  setTimeout(function(){
+    attackerUnit.removeClass('engager-indicator');
+  }, 1000);
+  var woundedOrc = $('.orc').eq(orcIndex);
+  woundedOrc.addClass('combat-indicator');
+  setTimeout(function(){
+    woundedOrc.removeClass('combat-indicator');
+  },1000);
+
     return combatResult;
 };
 
@@ -252,13 +264,26 @@ FieldOfBattle.prototype.orcAttack = function () {
   var orcUnit = this.orcArmy[orcIndex];
   var that = this;
   var combatResult = friendlyUnit.receiveDamage(orcUnit.attack());
-    if(friendlyUnit.health <= 0){
-      //animation code will go here
-      that.theDead +=1;
-      that.friendlyArmy.splice(friendlyIndex, 1);
-      //dom selector here to toggle a tombstone at place in index of orcArmy;
-      //we can add class tombstone and toggle it with orc css selector. will need to work on this.
-    }
+  if(orcUnit.health <= 0){
+    //animation code will go here
+    $('IMG').eq(orcIndex).prop('src', "dead.png");
+    $('IMG').eq(orcIndex).addClass('dead').removeClass('orc');
+    that.theDead +=1;
+    that.orcArmy.splice(orcIndex, 1);
+    //dom selector here to toggle a tombstone at place in index of orcArmy;
+    //we can add class tombstone and toggle it with orc css selector. will need to work on this.
+  }
+  var attackerUnit = $('.orc').eq(orcIndex);
+  attackerUnit.addClass("engager-indicator");
+  setTimeout(function(){
+    attackerUnit.removeClass('engager-indicator');
+  }, 1000);
+  var woundedHero = $('.hero').eq(friendlyIndex);
+  woundedHero.addClass('combat-indicator');
+  setTimeout(function(){
+    woundedHero.removeClass('combat-indicator');
+  },1000);
+
     return combatResult;
 };
 

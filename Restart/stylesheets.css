@@ -1,71 +1,149 @@
-
-.gifs {
-  float:right;
-  position: relative;
-  left: 100px;
-  top: 100px;
+.extra {
+  height: 50px;
+  width: 700px;
+  border: 1px solid black;
+}
+.damage {
   height: 400px;
   width: 400px;
-  border: 1px solid black;
+  display: block;
+  background-size: cover;
+  /* background-image: url(https://media.giphy.com/media/vrIWgzi5qXiY8/giphy.gif); */
 }
 .status {
   position: relative;
-  top: 125px;
-  left: 100px;
-  clear: right;
-  float: right;
-  height: 200px;
-  width: 400px;
-  border: 1px solid black;
+  bottom: 500px;
+  left: 2%;
+  height: 500px;
+  width: 250px;
+  /* border: 1px solid black; */
 }
 .commands {
-  float: left;
   position: relative;
-  height: 200px;
+  bottom: 600px;
+  left: 72%;
+  height: 100px;
   width: 400px;
-  top: 125px;
-  right: 250px;
-
-  border: 1px solid black;
+}
+.header {
+  position: relative;
+  left: 23.5%;
+  height:50px;
+  width: 500px;
+  margin: 5px 0;
+  /* border: 1px solid black; */
 }
 
-.gifs-two{
-    float: left;
-    clear: left;
-    position: relative;
-    right: 250px;
-    bottom: 500px;
-    height: 400px;
-    width: 400px;
-    border: 1px solid black;
-  }
+.combat-indicator{
+  background-color:rgba(300,0,0,0.5);
+  background-size: contain;
+}
 
+.engager-indicator{
+  background-color: rgba(0,400,0,0.5);
+  background-size: contain;
+}
 
-.show {display: block;}
+ul {
+  list-style-type: none;
+}
+
+.gifs {
+  position:relative;
+  bottom: 1000px;
+  right: 3.4%;
+  float: right;
+  height: 380px;
+  border: 1px solid black;
+  width: 400px;
+}
+
+.board{
+  background-image: url("grass.png");
+  position:relative;
+  left: 23.5%;
+  height: 500px;
+  width: 500px;
+}
 
 .grid {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  height: 600px;
-  width: 600px;
-  background-image: url("grass.png");
-  padding-top: 100px;
-  position: absolute;
-  left: 30%;
-  clear:both;
+  position: relative;
+  bottom: 1100px;
+  border-collapse:collapse;
+  left: 23.5%;
+  z-index: 1000;
 }
 
 .grid td {
     cursor:pointer;
-    width:75px;
-    height:75px;
-    border:1px solid #999;
+    width:100px;
+    height:100px;
     text-align:center;
     font-family:sans-serif;
-    font-size:50px
+    font-size: 50px;
     font-weight: bolder;
 }
 .grid td.clicked {
     background-color:rgba(0,0,0,0.5);
     font-weight:bold;
 }
+
+.attack {
+  border-radius: 10px;
+  border: 1px solid black;
+  text-align: center;
+  width: 100px;
+  margin:5px;
+  padding:5px;
+}
+
+.cast {
+  border-radius: 10px;
+  border: 1px solid black;
+  text-align: center;
+  width: 100px;
+  margin:5px;
+  padding:5px;
+}
+/* scrolling text for header */
+  .scroll-left {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  }
+  .scroll-left p {
+  width: 65%;
+  height: 100px;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  /* Starting position */
+  -moz-transform:translateX(100%);
+  -webkit-transform:translateX(100%);
+  transform:translateX(100%);
+  /* Apply animation to this element */
+  -moz-animation: scroll-left 10s linear infinite;
+  -webkit-animation: scroll-left 10s linear infinite;
+  animation: scroll-left 10s linear infinite;
+  }
+  /* Move it (define the animation) */
+  @-moz-keyframes scroll-left {
+  0% { -moz-transform: translateX(100%); }
+  100% { -moz-transform: translateX(-100%); }
+  }
+  @-webkit-keyframes scroll-left {
+  0% { -webkit-transform: translateX(100%); }
+  100% { -webkit-transform: translateX(-100%); }
+  }
+  @keyframes scroll-left {
+  0% {
+  -moz-transform: translateX(100%); /* Browser bug fix */
+  -webkit-transform: translateX(100%); /* Browser bug fix */
+  transform: translateX(100%);
+  }
+  100% {
+  -moz-transform: translateX(-100%); /* Browser bug fix */
+  -webkit-transform: translateX(-100%); /* Browser bug fix */
+  transform: translateX(-100%);
+  }
+  }

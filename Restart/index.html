@@ -5,16 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link href="stylesheets.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body>
-  <div class="container">
-    <div class = "gifs">GIFS</div>
-    <div class = "status">STATUS</div>
-    <div class = "commands">COMMANDS</div>
-    <div class = "gifs-two">GIFS2</div>
+
+<div class = "scroll-left"><p>A long time ago, in a galaxy far, far away...
+    It is a period of civil war. Rebel spaceships, striking from a hidden  base, have won their first victory  against the evil Galactic Empire.  
+    During the battle, Rebel spies managed to steal secret plans to the Empire's  ultimate weapon, the Death Star, an  armored space station with enough  power to destroy an entire planet.  
+    Pursued by the Empire's sinister agents, Princess Leia races home aboard her  starship, custodian of the stolen plans  that can save her people and restore  freedom to the galaxy.... 
+    </p></div>
+
+
+<div id ="background" class ="board"> </div>
+
+<div class = "status">
+    <div class = "ul-container-soldiers">
+        <ul class = "ul-soldier-list">
+
+          <li class = "soldier1">
+          <!--html side :: <p class="health"><span>HEALTH:</span>75</p> -->
+          <!--js side :: $('.viking-box .health').eq(i).html("<span>HEALTH:</span>"+theWar.vikingArmy[i].health); -->
+          <div class="soldier 1">
+              <div class="soldier-box 1">
+                <p class="health"><span>health:</span>1</p>
+                <img class="soldier-pic" src="" alt="sample soldier">
+                <p class="strength"><span>strength:</span>1</p>
+              </div>
+          </div>
+          </li>
+
+          <li class = "soldier2">
+            <div class="soldier 2">
+                <div class="soldier-box 2">
+                    <p class="health"><span>health:</span>1</p>
+                    <img class="soldier-pic" src="" alt="sample soldier">
+                    <p class="strength"><span>strength:</span>1</p>
+                </div>
+            </div>
+          </li>
+
+          <li class = "soldier3"></li>
+          <li class = "soldier4"></li>
+          <li class = "soldier5"></li>
+          <li class = "orc1"></li>
+          <li class = "orc2"></li>
+          <li class = "orc3"></li>
+          <li class = "orc4"></li>
+          <li class = "orc5"></li>
+    </ul>
+    </div>
+</div>
+
+<div class = "gifs">
+  <div class = "ul-container-actions">
+    <ul class ="ul-action-gifs">
+      <li class = "damage"></li>
+      <li class = "hit"></li>
+      <li class = "magic"></li>
+      <li class = "dead"></li>
+      <li class = "win"></li>
+      <li class = "lose"></li>
+    </ul>
   </div>
+</div>
+
+<div class = "commands">
+  <button class = "attack">ATTACK</button>
+  <button class = "cast">CAST</button>
+</div>
+
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
