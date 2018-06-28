@@ -47,6 +47,7 @@ Array.prototype.generateMap = function() {
 Map.prototype = Object.create(Array.prototype);
 Map.prototype.constructor = Map;
 
+
 function Adam(name, healthPoints, damagePoints, idTile, direction) {
   this.name = name;
   this.health = healthPoints;
@@ -55,20 +56,12 @@ function Adam(name, healthPoints, damagePoints, idTile, direction) {
   this.direction = direction;
   this.animationSprites = [0,1,2,3]; //We'll use this later to grab a value from the prototypes to toggle hit events, mana events..
 
-  // Adam.prototype.insertNameOfFunction = function(){
-  //   return this.damage;
-  // };
-  //var Adam1 = new Adam("Being", 100, 20, 100, 15, [x, y], d);
-
-  Adam.prototype = Object.create(Adam.prototype);
-  Adam.prototype.constructor = Adam;
-
 
   Adam.prototype.attack = function() {
     return this.damage;
   };
 
-  this.receiveDamage = function(theDamage) {
+  Adam.prototype.receiveDamage = function(theDamage) {
     this.health -= theDamage;
     console.log(this.name + "was attacked!");
     if (this.health > 0){
@@ -78,19 +71,16 @@ function Adam(name, healthPoints, damagePoints, idTile, direction) {
     }
   };
 
-  this.receiveSavageBite = function(savageBiteDamage){
+  Adam.prototype.receiveSavageBite = function(savageBiteDamage){
     this.health -= savageBiteDamage;
-    console.log(this.name + "was attacked!");
+    console.log(this.name + " was attacked!");
     if (this.health > 0){
       return this.name + " was bitten by a savage Orc. " + this.name + " takes " + savageBiteDamage + "points of damage!";
     } else {
-      return this.name + "Dies of infection!";
+      return this.name + " dies of infection!";
     }
   };
 }
-
-
-var Adam1 = new Adam("Adam", 100, 20, [0, 0], "s");
 
 //mage spell user
 function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
@@ -119,8 +109,6 @@ function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
 
 }
 
-var Sorc = new Mage("Mage", 100, 10, 100, 40, [0,1], "s");
-
 //Ranged Attack Character
 function Eve(name, health, damage, rangedAttackDamage, idTile, direction) {
   Adam.call(this, health, damage, idTile, direction);
@@ -146,8 +134,6 @@ function Eve(name, health, damage, rangedAttackDamage, idTile, direction) {
   };
 }
 
-var Archer = new Eve("Archer",100,20,45,[0, 2], "s");
-
 //creating an enemy type.
 function Orc(name, health, damage, savageBiteDamage, idTile, direction) {
   Adam.call(this, health, damage, idTile, direction);
@@ -168,7 +154,7 @@ function Orc(name, health, damage, savageBiteDamage, idTile, direction) {
     if (this.health > 0){
       return this.name + " has received " + damage + " points of damage.";
     }else {
-        return this.name + "has succumbed to its wounds.";
+      return this.name + "has succumbed to its wounds.";
     }
   };
 
@@ -178,7 +164,7 @@ function Orc(name, health, damage, savageBiteDamage, idTile, direction) {
     if (this.health > 0){
       return this.name + " has received " + magicDamage + " points of magic damage.";
     }else {
-        return this.name + "disintigrates into a pile of ash.";
+      return this.name + "disintigrates into a pile of ash.";
     }
   };
 
@@ -199,8 +185,8 @@ function FieldOfBattle(){
   this.theDead = 0;
 }
 
-FieldOfBattle.prototype.addSoldier = function (aSoldier){
-  this.friendlyArmy.push(aSoldier);
+FieldOfBattle.prototype.addHero = function (aHero){
+  this.friendlyArmy.push(aHero);
 };
 
 FieldOfBattle.prototype.addOrc = function (orc){
@@ -244,7 +230,35 @@ FieldOfBattle.prototype.orcAttack = function () {
 };
 
 FieldOfBattle.prototype.combatStatus = function() {
-  if (this.friendlyArmy.length === 0)
-    return "The last of the hero's have fallen...the Orcs feast upon their bodies...";
-  } else if (this.orcArmy.length === 0) {}
-}
+  if (this.friendlyArmy.length === 0){
+    return "The last of the hero's have fallen...the Orcs feast upon their bodies";
+  } else if (this.orcArmy.length === 0) {
+    return "Our hero's emerge victorious, let us honor those who have fallen" + theDead;
+  } else{
+    return false;
+  }
+};
+
+var theFieldOfBattle = new FieldOfBattle();
+
+var Archer = new Eve("Archer",100,20,45,[1, 1], "s");
+var Sorc = new Mage("Mage", 100, 10, 100, 40, [1,2], "s");
+var Knight1 = new Adam("Adam", 100, 20, [1, 3], "s");
+var Knight2 = new Adam("Adam2", 100, 20, [1, 4], "s");
+
+var Orc1 = new Orc("Supgugh", 120, 20, 30, [2, 1], "n");
+var Orc2 = new Orc("Crothu", 120, 20, 30, [2, 2], "n");
+var Orc3 = new Orc("Ug", 120, 20, 30, [2, 3], "n");
+var Orc4 = new Orc("Trugagh", 120, 20, 30, [2, 4], "n");
+
+theFieldOfBattle.addHero(Archer);
+theFieldOfBattle.addHero(Sorc);
+theFieldOfBattle.addHero(Knight1);
+theFieldOfBattle.addHero(Knight2);
+
+theFieldOfBattle.addOrc(Orc1);
+theFieldOfBattle.addOrc(Orc2);
+theFieldOfBattle.addOrc(Orc3);
+theFieldOfBattle.addOrc(Orc4);
+
+//function Orc(name, health, damage, savageBiteDamage, idTile, direction)

@@ -28,11 +28,11 @@ function clickableGrid(rows, cols, callback) {
     for (var c = 0; c < cols; ++c) {
       var cell = tr.appendChild(document.createElement('td'));
       cell.classList.add("tiles");
-      cell.classList.add(map.indexOf(map[r]) + "," + map.indexOf(map[c]));
       switch (map[r][c]) {
         case 1:
           {
             cell.appendChild(heroTileMaker());
+            cell.classList.add("hero");
           }
           break;
         case 2:
@@ -43,8 +43,9 @@ function clickableGrid(rows, cols, callback) {
         case 3:
           {
           cell.appendChild(orcTileMaker());
-          break;
+          cell.classList.add("orc");
           }
+          break;
         case 0:
           {
             cell.appendChild(treeTileMaker());
