@@ -11,7 +11,7 @@ var grid = clickableGrid(4, 6, function(el, row, col, i) {
  console.log("You clicked on element:", el);
  console.log("You clicked on row:", row);
  console.log("You clicked on col:", col);
- console.log("You clicked on item #:", idTile = [row, col]);
+ console.log("You clicked on item #:", idTileRow = row, idTileCol = col);
 
  el.className = 'clicked';
  if (lastClicked)
@@ -94,7 +94,7 @@ return (x);
 function orcTileMaker() {
 var x = document.createElement("IMG");
 x.setAttribute("src", "orc.gif");
-x.setAttribute("class", "dirt");
+x.setAttribute("class", "orc");
 x.setAttribute("width", "45px");
 x.setAttribute("height", "45px");
 x.setAttribute("alt", "orc tile");
@@ -104,7 +104,7 @@ return (x);
 function heroTileMaker() {
 var x = document.createElement("IMG");
 x.setAttribute("src", "Hero.gif");
-x.setAttribute("class", "stone");
+x.setAttribute("class", "hero");
 x.setAttribute("width", "45px");
 x.setAttribute("height", "45px");
 x.setAttribute("alt", "hero tile");
