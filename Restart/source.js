@@ -17,12 +17,6 @@ var grid = clickableGrid(5, 5, function(el, row, col, i) {
  console.log("You clicked on col:", col);
  console.log("You clicked on item #:", idTile = [row, col]);
 
-// var tdItems = document.querySelectorAll('td');
-// for(var t=0; t < tdItems.length; t++){
-//   tdItems[t].addEventListener('click', function(event){
-//     this.classList.toggle('clicked');
-//   });
-// }
 
  el.className = 'clicked';
  if (lastClicked)
@@ -42,7 +36,7 @@ function clickableGrid(rows, cols, callback) {
      cell.classList.add("tiles");
     switch(map[r][c]) {
       case 1: {cell.appendChild(soldierTileMaker());
-      cell.classList.add('soldier');}
+      cell.classList.add('hero');}
       break;
       case 2: {cell.appendChild(orcTileMaker());
       cell.classList.add('orc');}

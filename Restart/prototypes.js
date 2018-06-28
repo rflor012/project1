@@ -10,15 +10,6 @@ var map = [
 var r = 0;
 var c = 0;
 
-function Cell(location, row, col, tile){
-  this.location = location;
-  this.row = row;
-  this.col = col;
-  this.tile = tile;
-  this.contents = "empty";
-  this.hero = false;
-  this.enemy = [];
-}
 
 Array.prototype.generateMap = function() {
   for (var r = 0; r < map.length; r++) {
@@ -237,7 +228,12 @@ FieldOfBattle.prototype.friendlyAttack = function () {
   var combatResult = orcUnit.receiveDamage(friendlyUnit.attack());
   if(orcUnit.health <= 0){
     //animation code will go here
-    that.theDead +=1;
+    $('td > IMG').eq(orcIndex).addClass('dead').removeClass('orc');
+    $('td > IMG').eq(orcIndex).prop('src', "dead.png");
+    $('td > IMG').eq(orcIndex).prop('width', '45px');
+    $('td > IMG').eq(orcIndex).prop('height', '45px');
+
+    that.theDead.push(orcUnit);
     that.orcArmy.splice(orcIndex, 1);
     //dom selector here to toggle a tombstone at place in index of orcArmy;
     //we can add class tombstone and toggle it with orc css selector. will need to work on this.
@@ -266,10 +262,10 @@ FieldOfBattle.prototype.orcAttack = function () {
   var combatResult = friendlyUnit.receiveDamage(orcUnit.attack());
   if(orcUnit.health <= 0){
     //animation code will go here
-    $('IMG').eq(orcIndex).prop('src', "dead.png");
     $('IMG').eq(orcIndex).addClass('dead').removeClass('orc');
-    that.theDead +=1;
-    that.orcArmy.splice(orcIndex, 1);
+    $('IMG').eq(orcIndex).prop('src', "dead.png");
+    that.theDead.push(friendlyUnit);
+    that.friendlyArmy.splice(friendlyIndex, 1);
     //dom selector here to toggle a tombstone at place in index of orcArmy;
     //we can add class tombstone and toggle it with orc css selector. will need to work on this.
   }

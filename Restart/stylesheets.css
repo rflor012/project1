@@ -44,6 +44,12 @@
   background-size: contain;
 }
 
+.dead{
+  width: 45px;
+  height: 45px;
+
+}
+
 ul {
   list-style-type: none;
 }
