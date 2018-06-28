@@ -80,6 +80,7 @@ function Adam(name, healthPoints, damagePoints, idTile, direction) {
       return this.name + " dies of infection!";
     }
   };
+  
 }
 
 //mage spell user
@@ -88,9 +89,6 @@ function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
   this.name = name;
   this.mana = mana;
   this.magicDamage = magicDamage;
-
-  Mage.prototype = Object.create(Adam.prototype);
-  Mage.prototype.constructor = Mage;
 
   Mage.prototype.castSpell = function() {
     console.log(this.name + " cast a Spell.");
@@ -108,6 +106,8 @@ function Mage(name, health, damage, mana, magicDamage, idTile, direction) {
 };
 
 }
+Mage.prototype = Object.create(Adam.prototype);
+Mage.prototype.constructor = Mage;
 
 //Ranged Attack Character
 function Eve(name, health, damage, rangedAttackDamage, idTile, direction) {
@@ -233,7 +233,7 @@ FieldOfBattle.prototype.combatStatus = function() {
   if (this.friendlyArmy.length === 0){
     return "The last of the hero's have fallen...the Orcs feast upon their bodies";
   } else if (this.orcArmy.length === 0) {
-    return "Our hero's emerge victorious, let us honor those who have fallen" + theDead;
+    return "Our hero's emerge victorious, let us honor those who have fallen: " + theDead;
   } else{
     return false;
   }
